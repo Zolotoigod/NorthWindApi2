@@ -2,9 +2,9 @@
 
 namespace NorthWindApi2.Services
 {
-    public interface IBloggingService
+    public class BloggingService
     {
-        Task<int> Create(ArticleRequest article);
+        /*Task<int> Create(ArticleRequest article);
 
         Task Update(int articleId, ArticleRequest article);
 
@@ -12,6 +12,6 @@ namespace NorthWindApi2.Services
 
         Task<ArticleResponse> FindById(int articleId);
 
-        IAsyncEnumerable<ArticleResponse> FindAll(int offset, int limit);
+        IAsyncEnumerable<ArticleResponse> GetCollection(int offset, int limit);*/
     }
 }

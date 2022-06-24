@@ -9,7 +9,7 @@ namespace NorthWindApi2.Services
         /// </summary>
         /// <param name="offset">An offset of the first element to return.</param>
         /// <param name="limit">A limit of elements to return.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="ProductCategory"/>.</returns>
+        /// <returns>A <see cref="IAsyncEnumerable{T}"/> of <see cref="ProductCategory"/>.</returns>
         IAsyncEnumerable<CategoryResponse> GetCollection(int offset, int limit);
 
         /// <summary>

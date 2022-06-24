@@ -79,7 +79,7 @@ namespace NorthWindApi2.Controllers
         [HttpGet("{offset}/{limit}")]
         public async IAsyncEnumerable<ArticleResponse> FindAny([FromRoute] int offset, [FromRoute] int limit)
         {
-            await foreach (var article in this.blogService.GetCollection(offset, limit))
+            await foreach (var article in this.blogService.FindAll(offset, limit))
             {
                 yield return article;
             }

@@ -6,15 +6,15 @@ namespace NorthWindApi2.Controllers
 {
     [ApiController]
     [Route("api/categories")]
-    public class ProductCategoriesController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly ICategoriesService categoriesService;
-        private readonly ICategoriesPictureService pictureService;
+        //private readonly ICategoriesPictureService pictureService;
 
-        public ProductCategoriesController(ICategoriesService categoriesService, ICategoriesPictureService pictureService)
+        public CategoriesController(ICategoriesService categoriesService/*, ICategoriesPictureService pictureService*/)
         {
             this.categoriesService = categoriesService;
-            this.pictureService = pictureService;
+            //this.pictureService = pictureService;
         }
 
         [HttpPost]
@@ -100,7 +100,7 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                await this.pictureService.UpdatePicture(categoryId, Request.Body, (int)Request.ContentLength!);
+                //await this.pictureService.UpdatePicture(categoryId, Request.Body, (int)Request.ContentLength!);
                 return this.Ok();
             }
             catch (Exception ex)
@@ -116,12 +116,13 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                var stream = await this.pictureService.ShowPicture(categoryId);
+                /*var stream = await this.pictureService.ShowPicture(categoryId);
                 var picture = new byte[stream.Length];
                 await stream.ReadAsync(picture);
 
                 var result = this.File(picture, "image/bmp", $"picture{categoryId}.bmp");
-                return result;
+                return result;*/
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -136,7 +137,7 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                await this.pictureService.DestroyPicture(categoryId);
+                //await this.pictureService.DestroyPicture(categoryId);
                 return this.Ok();
             }
             catch (Exception ex)

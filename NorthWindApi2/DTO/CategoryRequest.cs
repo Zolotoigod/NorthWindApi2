@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NorthWindEFRepository.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace NorthWindApi2.DTO
 {
@@ -8,5 +9,14 @@ namespace NorthWindApi2.DTO
         [StringLength(15)]
         public string? CategoryName { get; set; }
         public string? Description { get; set; }
+
+        public Category ToEntity()
+        {
+            return new Category()
+            {
+                Name = CategoryName,
+                Description = Description,
+            };
+        }
     }
 }
