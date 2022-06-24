@@ -13,7 +13,6 @@ namespace NorthWindApi2.DTO
         [StringLength(30)]
         public string? Title { get; set; }
         public DateTime? BirthDate { get; set; }
-        public DateTime? HireDate { get; set; }
 
         [Required]
         [StringLength(60)]

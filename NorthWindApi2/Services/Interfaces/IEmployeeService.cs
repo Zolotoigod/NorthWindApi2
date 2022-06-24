@@ -25,7 +25,7 @@ namespace NorthWindApi2.Services
         /// </summary>
         /// <param name="employeeId">Id of employee</param>
         /// <returns>Employee</returns>
-        Task<EmployeeResponse> Find(int employeeId);
+        Task<EmployeeResponse> Get(int employeeId);
 
         /// <summary>
         /// Get collection of employee
@@ -33,7 +33,7 @@ namespace NorthWindApi2.Services
         /// <param name="offset">Offset</param>
         /// <param name="limit">Limit</param>
         /// <returns>Collection</returns>
-        IAsyncEnumerable<EmployeeResponse> FindAll(int offset, int limit);
+        IAsyncEnumerable<EmployeeResponse> GetCollection(int offset, int limit);
 
         /// <summary>
         /// Update employee

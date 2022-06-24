@@ -35,7 +35,9 @@ namespace NorthWindApi2.Controllers
         [ProducesResponseType(typeof(IAsyncEnumerable<EmployeeResponse>), StatusCodes.Status200OK)]
         public async IAsyncEnumerable<EmployeeResponse> GetCollecttion(int offset, int limit)
         {
-            await foreach (var employee in this.service.FindAll(0, 100))
+            var employeeCount = await this.service.GetCount();
+            Response.Headers.Add(Defines.Total, employeeCount.ToString());
+            await foreach (var employee in this.service.GetCollection(offset, limit))
             {
                 yield return employee;
             }
@@ -48,7 +50,7 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                return this.Ok(await this.service.Find(employeeId));
+                return this.Ok(await this.service.Get(employeeId));
             }
             catch (Exception)
             {

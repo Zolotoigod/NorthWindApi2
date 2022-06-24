@@ -36,7 +36,7 @@ namespace NorthWindApi2.Controllers
         public async IAsyncEnumerable<ProductResponse> GetCollection([FromRoute] int offset, [FromRoute] int limit)
         {
             var productCount = await productService.GetCount();
-            Response.Headers.Add("totalProduct", productCount.ToString());
+            Response.Headers.Add(Defines.Total, productCount.ToString());
             await foreach (var product in this.productService.GetCollection(offset, limit))
             {
                 yield return product;
