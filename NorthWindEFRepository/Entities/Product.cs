@@ -13,6 +13,7 @@ namespace NorthWindEFRepository.Entities
 
         [Required]
         [StringLength(40)]
+        [Column("ProductName")]
         public string Name { get; set; }
 
         [Column("SupplierID")]

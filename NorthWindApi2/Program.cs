@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ICategoriesService, CategoriesService>()
                 .AddSingleton<ICategoriesRepository, CategoriesRepository>()
+                .AddSingleton<IProductService, ProductService>()
+                .AddSingleton<IProductRepository, ProductsRepository>()
                 .AddDbContext<NorthWindContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")), ServiceLifetime.Singleton);
 
 builder.Services.AddSwaggerGen(c =>

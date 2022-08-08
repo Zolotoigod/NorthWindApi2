@@ -86,15 +86,15 @@ namespace NorthWindEFRepository.Repositories
                     Defines.EntityNames.Category,
                     productId));
 
-            product.Name = newProduct.Name;
-            product.CategoryId = newProduct.CategoryId;
-            product.UnitPrice = newProduct.UnitPrice;
-            product.UnitsOnOrder = newProduct.UnitsOnOrder;
-            product.UnitsInStock = newProduct.UnitsInStock;
-            product.QuantityPerUnit = newProduct.QuantityPerUnit;
-            product.Discontinued = newProduct.Discontinued;
-            product.SupplierId = newProduct.SupplierId;
-            product.ReorderLevel = newProduct.ReorderLevel;
+            product.Name = newProduct.Name ?? product.Name;
+            product.CategoryId = newProduct.CategoryId ?? product.CategoryId;
+            product.UnitPrice = newProduct.UnitPrice ?? product.UnitPrice;
+            product.UnitsOnOrder = newProduct.UnitsOnOrder ?? product.UnitsOnOrder;
+            product.UnitsInStock = newProduct.UnitsInStock ?? product.UnitsInStock;
+            product.QuantityPerUnit = newProduct.QuantityPerUnit ?? product.QuantityPerUnit;
+            product.Discontinued = newProduct.Discontinued; // todo solve nullable problem
+            product.SupplierId = newProduct.SupplierId ?? product.SupplierId;
+            product.ReorderLevel = newProduct.ReorderLevel ?? product.ReorderLevel;
 
             await context.SaveChangesAsync();
         }

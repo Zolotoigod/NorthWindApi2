@@ -5,7 +5,6 @@ namespace NorthWindApi2.DTO
 {
     public class ProductRequest
     {
-        [Required]
         public string? ProductName { get; set; }
         public int? SupplierId { get; set; }
         public int? CategoryId { get; set; }
@@ -29,7 +28,7 @@ namespace NorthWindApi2.DTO
             UnitsInStock = UnitsInStock,
             UnitsOnOrder = UnitsOnOrder,
             ReorderLevel = ReorderLevel,
-            Discontinued = Discontinued
+            Discontinued = Discontinued,
         };        
     }
 }

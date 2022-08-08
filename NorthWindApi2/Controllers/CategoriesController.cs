@@ -61,7 +61,7 @@ namespace NorthWindApi2.Controllers
             }
         }
 
-        [HttpGet("{name}")]
+        [HttpPatch("name")]
         [ProducesResponseType(typeof(CategoryResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(MyErrorMessage), StatusCodes.Status400BadRequest)]
         public async IAsyncEnumerable<CategoryResponse> GetByName([FromBody] IList<string> names)
