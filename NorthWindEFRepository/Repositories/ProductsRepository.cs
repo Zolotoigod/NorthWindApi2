@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthWindEFRepository.Contexts;
 using NorthWindEFRepository.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace NorthWindEFRepository.Repositories
 {
