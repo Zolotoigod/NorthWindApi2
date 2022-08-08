@@ -18,7 +18,7 @@ namespace NorthWindEFRepository.Repositories
             return await context.Categories!.FindAsync(categoryId)
                 ?? throw new KeyNotFoundException(string.Format(
                     Defines.ErrorMesage.ItemNotFoundTemplate,
-                    "Category",
+                    Defines.EntityNames.Category,
                     categoryId));
         }
 
@@ -43,7 +43,7 @@ namespace NorthWindEFRepository.Repositories
             var category = await context.Categories!.FindAsync(categoryId)
                 ?? throw new KeyNotFoundException(string.Format(
                     Defines.ErrorMesage.ItemNotFoundTemplate,
-                    "Category",
+                    Defines.EntityNames.Category,
                     categoryId));
 
             category.Name = newCategory.Name;
@@ -57,7 +57,7 @@ namespace NorthWindEFRepository.Repositories
             var category = await context.Categories!.FindAsync(categoryId)
                 ?? throw new KeyNotFoundException(string.Format(
                     Defines.ErrorMesage.ItemNotFoundTemplate,
-                    "Category",
+                    Defines.EntityNames.Category,
                     categoryId));
             context.Remove(category);
 
@@ -67,6 +67,16 @@ namespace NorthWindEFRepository.Repositories
         public Task<int> GetCount()
         {
             return context.Categories!.CountAsync();
+        }
+
+        // prerelise
+        public async IAsyncEnumerable<Category> LookupByName(IList<string> names)
+        {
+            var query = context.Categories!.Where(c => names.Contains(c.Name)).AsAsyncEnumerable();
+            await foreach (var category in query)
+            {
+                yield return category;
+            }
         }
     }
 }

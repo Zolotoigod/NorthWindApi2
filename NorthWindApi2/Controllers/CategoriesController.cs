@@ -61,6 +61,19 @@ namespace NorthWindApi2.Controllers
             }
         }
 
+        [HttpGet("{name}")]
+        [ProducesResponseType(typeof(CategoryResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MyErrorMessage), StatusCodes.Status400BadRequest)]
+        public async IAsyncEnumerable<CategoryResponse> GetByName([FromBody] IList<string> names)
+        {
+            var productCount = await categoriesService.GetCount();
+            Response.Headers.Add(Defines.Total, productCount.ToString());
+            await foreach (var category in this.categoriesService.LookupByName(names))
+            {
+                yield return category;
+            }
+        }
+
         [HttpPut("{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(MyErrorMessage), StatusCodes.Status400BadRequest)]

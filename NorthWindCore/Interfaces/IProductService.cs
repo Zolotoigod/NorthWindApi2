@@ -42,7 +42,7 @@ namespace NorthWindApi2.Services
         /// </summary>
         /// <param name="names">A list of product names.</param>
         /// <returns>A list of products with specified names.</returns>
-        IAsyncEnumerable<ProductRequest> LookupProductsByName(IList<string> names);
+        IList<ProductRequest> LookupProductsByName(IList<string> names);
 
         /// <summary>
         /// Updates a product.
@@ -57,7 +57,7 @@ namespace NorthWindApi2.Services
         /// </summary>
         /// <param name="categoryId">A product category identifier.</param>
         /// <returns>A <see cref="IList{T}"/> of <see cref="ProductRequest"/>.</returns>
-        IAsyncEnumerable<ProductRequest> ShowProductsForCategory(int categoryId);
+        IList<ProductRequest> ShowProductsForCategory(int categoryId);
 
         Task<int> GetCount();
     }

@@ -1,64 +1,73 @@
 ﻿using NorthWindApi2.DTO;
+using NorthWindEFRepository.Repositories;
 
 namespace NorthWindApi2.Services
 {
     /// <summary>
     /// Represents a management service for products.
     /// </summary>
-    public class ProductService
+    public class ProductService : IProductService
     {
-        /*/// <summary>
-        /// Shows a list of products using specified offset and limit for pagination.
-        /// </summary>
-        /// <param name="offset">An offset of the first element to return.</param>
-        /// <param name="limit">A limit of elements to return.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="ProductRequest"/>.</returns>
-        IAsyncEnumerable<ProductResponse> GetCollection(int offset, int limit);
+        private readonly IProductRepository productRepository;
 
-        /// <summary>
-        /// Try to show a product with specified identifier.
-        /// </summary>
-        /// <param name="productId">A product identifier.</param>
-        /// <param name="product">A product to return.</param>
-        /// <returns>Returns true if a product is returned; otherwise false.</returns>
-        Task<ProductResponse> Get(int productId);
+        public ProductService(IProductRepository repository)
+        {
+            productRepository = repository;
+        }
 
-        /// <summary>
-        /// Creates a new product.
-        /// </summary>
-        /// <param name="product">A <see cref="ProductRequest"/> to create.</param>
-        /// <returns>An identifier of a created product.</returns>
-        Task<int> CreateProduct(ProductRequest product);
+        /// <inheritdoc/>
+        public async Task<int> CreateProduct(ProductRequest product)
+        {
+            return await productRepository.Add(product.ToEntity());
+        }
 
-        /// <summary>
-        /// Destroys an existed product.
-        /// </summary>
-        /// <param name="productId">A product identifier.</param>
-        /// <returns>True if a product is destroyed; otherwise false.</returns>
-        Task DestroyProduct(int productId);
+        /// <inheritdoc/>
+        public async Task DestroyProduct(int productId)
+        {
+            await productRepository.Remove(productId);
+        }
 
-        /// <summary>
-        /// Looks up for product with specified names.
-        /// </summary>
-        /// <param name="names">A list of product names.</param>
-        /// <returns>A list of products with specified names.</returns>
-        IList<ProductRequest> LookupProductsByName(IList<string> names);
+        /// <inheritdoc/>
+        public async Task<ProductResponse> Get(int productId)
+        {
+           return new ProductResponse(await productRepository.GetById(productId));
+        }
 
-        /// <summary>
-        /// Updates a product.
-        /// </summary>
-        /// <param name="productId">A product identifier.</param>
-        /// <param name="product">A <see cref="ProductRequest"/>.</param>
-        /// <returns>True if a product is updated; otherwise false.</returns>
-        Task UpdateProduct(int productId, ProductRequest product);
+        /// <inheritdoc/>
+        public async IAsyncEnumerable<ProductResponse> GetCollection(int offset, int limit)
+        {
+            await foreach (var product in productRepository.GetCollection(offset, limit))
+            {
+                yield return new ProductResponse(product);
+            }
+        }
 
-        /// <summary>
-        /// Shows a list of products that belongs to a specified category.
-        /// </summary>
-        /// <param name="categoryId">A product category identifier.</param>
-        /// <returns>A <see cref="IList{T}"/> of <see cref="ProductRequest"/>.</returns>
-        IList<ProductRequest> ShowProductsForCategory(int categoryId);
+        /// <inheritdoc/>
+        public async Task<int> GetCount() => await productRepository.GetCount();
 
-        Task<int> GetCount();*/
+
+        /// <inheritdoc/>
+        public async IAsyncEnumerable<ProductRequest> LookupProductsByName(IList<string> names)
+        {
+            await foreach (var product in productRepository.LookupProductsByName(names))
+            {
+                yield return new ProductResponse(product);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async IAsyncEnumerable<ProductRequest> ShowProductsForCategory(int categoryId)
+        {
+            await foreach (var product in productRepository.ShowProductsForCategory(categoryId))
+            {
+                yield return new ProductResponse(product);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task UpdateProduct(int productId, ProductRequest product)
+        {
+            await productRepository.Update(productId, product.ToEntity());
+        }
     }
 }

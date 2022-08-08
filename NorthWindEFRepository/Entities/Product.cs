@@ -9,11 +9,11 @@ namespace NorthWindEFRepository.Entities
     {
         [Key]
         [Column("ProductID")]
-        public int ProductId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
 
         [Column("SupplierID")]
         public int? SupplierId { get; set; }

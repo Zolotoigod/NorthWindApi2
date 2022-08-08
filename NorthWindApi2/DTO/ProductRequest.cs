@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NorthWindEFRepository.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace NorthWindApi2.DTO
 {
@@ -17,5 +18,18 @@ namespace NorthWindApi2.DTO
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+
+        public Product ToEntity() => new Product()
+        {
+            Name = ProductName,
+            SupplierId = SupplierId,
+            CategoryId = CategoryId,
+            QuantityPerUnit = QuantityPerUnit,
+            UnitPrice = UnitPrice,
+            UnitsInStock = UnitsInStock,
+            UnitsOnOrder = UnitsOnOrder,
+            ReorderLevel = ReorderLevel,
+            Discontinued = Discontinued
+        };        
     }
 }

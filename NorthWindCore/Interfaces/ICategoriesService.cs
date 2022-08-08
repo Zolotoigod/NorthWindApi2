@@ -37,7 +37,7 @@ namespace NorthWindApi2.Services
         /// </summary>
         /// <param name="names">A list of product category names.</param>
         /// <returns>A list of product categories with specified names.</returns>
-        IAsyncEnumerable<CategoryResponse> LookupByName(IList<string> names);
+        IList<CategoryResponse> LookupByName(IList<string> names);
 
         /// <summary>
         /// Updates a product category.

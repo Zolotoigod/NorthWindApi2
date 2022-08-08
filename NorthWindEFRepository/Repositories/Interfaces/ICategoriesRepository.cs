@@ -9,7 +9,7 @@ namespace NorthWindEFRepository.Repositories
         IAsyncEnumerable<Category> GetCollection(int offset, int limit);
         Task Remove(int categoryId);
         Task Update(int categoryId, Category newCategory);
-
         Task<int> GetCount();
+        IAsyncEnumerable<Category> LookupByName(IList<string> names);
     }
 }

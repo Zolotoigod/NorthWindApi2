@@ -53,7 +53,7 @@ namespace NorthWindApi2.Services
         }
 
         /// <iheritdoc/>
-        public async IAsyncEnumerable<CategoryResponse> LookupByName(IList<string> names)
+        public async IList<CategoryResponse> LookupByName(IList<string> names)
         {
             await foreach (var category in categories.LookupByName(names))
             {

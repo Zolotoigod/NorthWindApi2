@@ -9,5 +9,14 @@ namespace NorthWindEFRepository
         {
             public const string ItemNotFoundTemplate = "{0} id-<{1}> not found!";
         }
+
+        public readonly struct EntityNames
+        {
+            public const string Product = "Product";
+            public const string Category = "Category";
+            public const string Employee = "Employee";
+            public const string Blog = "Blog";
+            public const string Picture = "Picture";
+        }
     }
 }
