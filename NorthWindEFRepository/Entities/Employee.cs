@@ -9,7 +9,7 @@ namespace NorthWindEFRepository.Entities
     {
         [Key]
         [Column("EmployeeID")]
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(20)]

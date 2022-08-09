@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NorthWindEFRepository.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace NorthWindApi2.DTO
 {
@@ -35,5 +36,19 @@ namespace NorthWindApi2.DTO
 
         [StringLength(255)]
         public string? PhotoPath { get; set; }
+
+        public Employee ToEntity(byte[] photoByte) => new Employee 
+        {
+            LastName = LastName,
+            FirstName = FirstName,
+            Title = Title,
+            BirthDate = BirthDate,
+            Address = Address,
+            City = City,
+            Region = Region,
+            Country = Country,
+            HomePhone = HomePhone,
+            Photo = photoByte
+        };
     }
 }

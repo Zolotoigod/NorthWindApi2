@@ -56,12 +56,12 @@ namespace NorthWindEFRepository.Repositories
         /// <inheritdoc/>
         public async Task Remove(int productId)
         {
-            var category = await context.Products!.FindAsync(productId)
+            var product = await context.Products!.FindAsync(productId)
                 ?? throw new KeyNotFoundException(string.Format(
                     Defines.ErrorMesage.ItemNotFoundTemplate,
-                    Defines.EntityNames.Category,
+                    Defines.EntityNames.Product,
                     productId));
-            context.Remove(category);
+            context.Remove(product);
 
             await context.SaveChangesAsync();
         }
@@ -81,20 +81,25 @@ namespace NorthWindEFRepository.Repositories
             var product = await context.Products!.FindAsync(productId)
                 ?? throw new KeyNotFoundException(string.Format(
                     Defines.ErrorMesage.ItemNotFoundTemplate,
-                    Defines.EntityNames.Category,
+                    Defines.EntityNames.Product,
                     productId));
 
-            product.Name = newProduct.Name ?? product.Name;
-            product.CategoryId = newProduct.CategoryId ?? product.CategoryId;
-            product.UnitPrice = newProduct.UnitPrice ?? product.UnitPrice;
-            product.UnitsOnOrder = newProduct.UnitsOnOrder ?? product.UnitsOnOrder;
-            product.UnitsInStock = newProduct.UnitsInStock ?? product.UnitsInStock;
-            product.QuantityPerUnit = newProduct.QuantityPerUnit ?? product.QuantityPerUnit;
-            product.Discontinued = newProduct.Discontinued; // todo solve nullable problem
-            product.SupplierId = newProduct.SupplierId ?? product.SupplierId;
-            product.ReorderLevel = newProduct.ReorderLevel ?? product.ReorderLevel;
+            UpdateDate(product, newProduct);
 
             await context.SaveChangesAsync();
+        }
+
+        private  void UpdateDate(Product oldP, Product newP)
+        {
+            oldP.Name = newP.Name ?? oldP.Name;
+            oldP.CategoryId = newP.CategoryId ?? oldP.CategoryId;
+            oldP.UnitPrice = newP.UnitPrice ?? oldP.UnitPrice;
+            oldP.UnitsOnOrder = newP.UnitsOnOrder ?? oldP.UnitsOnOrder;
+            oldP.UnitsInStock = newP.UnitsInStock ?? oldP.UnitsInStock;
+            oldP.QuantityPerUnit = newP.QuantityPerUnit ?? oldP.QuantityPerUnit;
+            oldP.Discontinued = newP.Discontinued; // todo solve nullable problem
+            oldP.SupplierId = newP.SupplierId ?? oldP.SupplierId;
+            oldP.ReorderLevel = newP.ReorderLevel ?? oldP.ReorderLevel;
         }
     }
 }

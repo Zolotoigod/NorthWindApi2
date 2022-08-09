@@ -1,51 +1,58 @@
 ﻿using NorthWindApi2.DTO;
+using NorthWindEFRepository.Repositories;
 
 namespace NorthWindApi2.Services
 {
     /// <summary>
     /// Represents a management service for employees.
     /// </summary>
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
-        /*/// <summary>
-        /// Add employee to storage
-        /// </summary>
-        /// <param name="employee">New employee</param>
-        /// <returns>Employee id</returns>
-        Task<int> Add(EmployeeRequest employee);
+        private readonly IEmployeeRepository repository;
 
-        /// <summary>
-        /// Delete employee by id
-        /// </summary>
-        /// <param name="employeeId">Employee id</param>
-        Task Delete(int employeeId);
+        public EmployeeService(IEmployeeRepository employeeRepository)
+        {
+            repository = employeeRepository;
+        }
 
-        /// <summary>
-        /// Get employee by id
-        /// </summary>
-        /// <param name="employeeId">Id of employee</param>
-        /// <returns>Employee</returns>
-        Task<EmployeeResponse> Get(int employeeId);
+        /// <inheritdoc/>
+        public async Task<int> Add(EmployeeRequest employee)
+        {
+            byte[] photo = new byte[10]; // get from repo
+            return await repository.Add(employee.ToEntity(photo));
+        }
 
-        /// <summary>
-        /// Get collection of employee
-        /// </summary>
-        /// <param name="offset">Offset</param>
-        /// <param name="limit">Limit</param>
-        /// <returns>Collection</returns>
-        IAsyncEnumerable<EmployeeResponse> GetCollection(int offset, int limit);
+        /// <inheritdoc/>
+        public async Task Delete(int employeeId)
+        {
+            await repository.Remove(employeeId);
+        }
 
-        /// <summary>
-        /// Update employee
-        /// </summary>
-        /// <param name="employeeId">Employee to update</param>
-        /// <param name="employee">New data</param>
-        Task Update(int employeeId, EmployeeRequest employee);
+        /// <inheritdoc/>
+        public async Task<EmployeeResponse> Get(int employeeId)
+        {
+            return new EmployeeResponse(await repository.GetById(employeeId));
+        }
 
-        /// <summary>
-        /// Get count of recods in storage
-        /// </summary>
-        /// <returns>Count of records</returns>
-        Task<int> GetCount();*/
+        /// <inheritdoc/>
+        public async IAsyncEnumerable<EmployeeResponse> GetCollection(int offset, int limit)
+        {
+            await foreach(var employee in repository.GetCollection(offset, limit))
+            {
+                yield return new EmployeeResponse(employee);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task<int> GetCount()
+        {
+            return await repository.GetCount();
+        }
+
+        /// <inheritdoc/>
+        public async Task Update(int employeeId, EmployeeRequest employee)
+        {
+            await repository.Update(employeeId, employee.ToEntity(new byte[10]));
+        }
     }
 }
