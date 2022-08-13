@@ -1,5 +1,4 @@
 ﻿using NorthWindEFRepository.Entities;
-using NorthWindEFRepository.Repositories.Interfaces;
 
 namespace NorthWindEFRepository.Repositories
 {

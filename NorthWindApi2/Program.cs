@@ -12,6 +12,8 @@ builder.Services.AddSingleton<ICategoriesService, CategoriesService>()
                 .AddSingleton<IProductRepository, ProductsRepository>()
                 .AddSingleton<IEmployeeService, EmployeeService>()
                 .AddSingleton<IEmployeeRepository, EmployeeRepository>()
+                .AddSingleton<IPictureService, CategoriesPictureService>()
+                .AddSingleton<IPictureRepository, CategoriesRepository>()
                 .AddDbContext<NorthWindContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")), ServiceLifetime.Singleton);
 
 builder.Services.AddSwaggerGen(c =>

@@ -1,5 +1,4 @@
 ﻿using NorthWindEFRepository.Repositories;
-using NorthWindEFRepository.Repositories.Interfaces;
 
 namespace NorthWindApi2.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace NorthWindEFRepository.Repositories.Interfaces
+﻿namespace NorthWindEFRepository.Repositories
 {
     public interface IPictureRepository
     {

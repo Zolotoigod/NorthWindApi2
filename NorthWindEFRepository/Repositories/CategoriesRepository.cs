@@ -97,6 +97,11 @@ namespace NorthWindEFRepository.Repositories
                     Defines.EntityNames.Picture,
                     id));
 
+            if (category.Picture![0..28].SequenceEqual(Defines.AccessDBServiceBytes))
+            {
+                return new MemoryStream(category.Picture![78..^0]);
+            }
+
             return new MemoryStream(category.Picture!);
         }
     }
