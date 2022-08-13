@@ -1,8 +1,9 @@
-﻿using NorthWindEFRepository.Entities;
+﻿using NorthWindEFRepository.BlogEntities;
+using NorthWindEFRepository.Entities;
 
 namespace NorthWindEFRepository.Repositories
 {
-    public interface IBloggingRepository
+    public interface IBloggingRepository : IBaseRepository<BlogArticle>
     {
     }
 }

@@ -16,5 +16,9 @@ namespace NorthWindEFRepository.BlogEntities
 
         [Column("Comment")]
         public string Text { get; set; }
+
+        [Column("CreatedDate")]
+
+        public DateTime CreatedDate { get; set; }
     }
 }

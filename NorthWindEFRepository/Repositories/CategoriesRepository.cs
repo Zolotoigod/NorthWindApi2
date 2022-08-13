@@ -46,8 +46,8 @@ namespace NorthWindEFRepository.Repositories
                     Defines.EntityNames.Category,
                     categoryId));
 
-            category.Name = newCategory.Name;
-            category.Description = newCategory.Description;
+            category.Name = newCategory.Name ?? category.Name;
+            category.Description = newCategory.Description ?? category.Description;
 
             await context.SaveChangesAsync();
         }
@@ -59,15 +59,12 @@ namespace NorthWindEFRepository.Repositories
                     Defines.ErrorMesage.ItemNotFoundTemplate,
                     Defines.EntityNames.Category,
                     categoryId));
-            context.Remove(category);
+            context.Categories.Remove(category);
 
             await context.SaveChangesAsync();
         }
 
-        public Task<int> GetCount()
-        {
-            return context.Categories!.CountAsync();
-        }
+        public async Task<int> GetCount() => await context.Categories!.CountAsync();
 
         // prerelise
         public async IAsyncEnumerable<Category> LookupByName(IList<string> names)

@@ -47,7 +47,7 @@ namespace NorthWindEFRepository.Repositories
                     Defines.ErrorMesage.ItemNotFoundTemplate,
                     Defines.EntityNames.Employee,
                     employeeId));
-            context.Remove(employee);
+            context.Employees.Remove(employee);
 
             await context.SaveChangesAsync();
         }

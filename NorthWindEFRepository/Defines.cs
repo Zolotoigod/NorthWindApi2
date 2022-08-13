@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace NorthWindEFRepository
 {
     public static class Defines
@@ -15,8 +13,10 @@ namespace NorthWindEFRepository
             public const string Product = "Product";
             public const string Category = "Category";
             public const string Employee = "Employee";
-            public const string Blog = "Blog";
+            public const string BlogArticle = "Blog article";
             public const string Picture = "Picture";
+            public const string Comment = "Comment";
+            public const string Link = "link";
         }
     }
 }

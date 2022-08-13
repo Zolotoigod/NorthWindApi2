@@ -61,7 +61,7 @@ namespace NorthWindEFRepository.Repositories
                     Defines.ErrorMesage.ItemNotFoundTemplate,
                     Defines.EntityNames.Product,
                     productId));
-            context.Remove(product);
+            context.Products.Remove(product);
 
             await context.SaveChangesAsync();
         }
@@ -97,7 +97,7 @@ namespace NorthWindEFRepository.Repositories
             oldP.UnitsOnOrder = newP.UnitsOnOrder ?? oldP.UnitsOnOrder;
             oldP.UnitsInStock = newP.UnitsInStock ?? oldP.UnitsInStock;
             oldP.QuantityPerUnit = newP.QuantityPerUnit ?? oldP.QuantityPerUnit;
-            oldP.Discontinued = newP.Discontinued; // todo solve nullable problem
+            oldP.Discontinued = newP.Discontinued; // discontinued required 
             oldP.SupplierId = newP.SupplierId ?? oldP.SupplierId;
             oldP.ReorderLevel = newP.ReorderLevel ?? oldP.ReorderLevel;
         }
