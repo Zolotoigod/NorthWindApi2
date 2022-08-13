@@ -18,8 +18,7 @@ namespace NorthWindApi2.Services
         /// <inheritdoc/>
         public async Task<int> Add(EmployeeRequest employee)
         {
-            byte[] photo = new byte[10]; // get from repo
-            return await repository.Add(employee.ToEntity(photo));
+            return await repository.Add(employee.ToEntity());
         }
 
         /// <inheritdoc/>
@@ -52,7 +51,7 @@ namespace NorthWindApi2.Services
         /// <inheritdoc/>
         public async Task Update(int employeeId, EmployeeRequest employee)
         {
-            await repository.Update(employeeId, employee.ToEntity(new byte[10]));
+            await repository.Update(employeeId, employee.ToEntity());
         }
     }
 }

@@ -1,28 +1,33 @@
-﻿namespace NorthWindApi2.Services
+﻿using NorthWindEFRepository.Repositories;
+using NorthWindEFRepository.Repositories.Interfaces;
+
+namespace NorthWindApi2.Services
 {
-    public class CategoriesPictureService
+    public class CategoriesPictureService : IPictureService
     {
-       /* /// <summary>
-        /// Try to show a product category picture.
-        /// </summary>
-        /// <param name="categoryId">A product category identifier.</param>
-        /// <param name="bytes">An array of picture bytes.</param>
-        /// <returns>True if a product category is exist; otherwise false.</returns>
-        Task<Stream> ShowPicture(int categoryId);
+        private readonly IPictureRepository repository;
 
-        /// <summary>
-        /// Update a product category picture.
-        /// </summary>
-        /// <param name="categoryId">A product category identifier.</param>
-        /// <param name="stream">A <see cref="Stream"/>Stream</param>
-        /// <returns>True if a product category is exist; otherwise false.</returns>
-        Task UpdatePicture(int categoryId, Stream stream, int contentLenth);
+        public CategoriesPictureService(IPictureRepository repository)
+        {
+            this.repository = repository;
+        }
 
-        /// <summary>
-        /// Destroy a product category picture.
-        /// </summary>
-        /// <param name="categoryId">A product category identifier.</param>
-        /// <returns>True if a product category is exist; otherwise false.</returns>
-        Task DestroyPicture(int categoryId);*/
+        public async Task DestroyPicture(int categoryId)
+        {
+            await repository.UpdatePicture(categoryId, null);            
+        }
+
+        public async Task<Stream> ShowPicture(int categoryId)
+        {
+            return await repository.ShowPicture(categoryId);
+        }
+
+        public async Task UpdatePicture(int categoryId, Stream stream, int contentLenth)
+        {
+            var bytes = new byte[stream.Length];
+            await stream.ReadAsync(bytes);
+
+            await repository.UpdatePicture(categoryId, bytes);
+        }
     }
 }

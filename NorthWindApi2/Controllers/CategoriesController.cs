@@ -9,12 +9,12 @@ namespace NorthWindApi2.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoriesService categoriesService;
-        //private readonly ICategoriesPictureService pictureService;
+        private readonly IPictureService pictureService;
 
-        public CategoriesController(ICategoriesService categoriesService/*, ICategoriesPictureService pictureService*/)
+        public CategoriesController(ICategoriesService categoriesService, IPictureService pictureService)
         {
             this.categoriesService = categoriesService;
-            //this.pictureService = pictureService;
+            this.pictureService = pictureService;
         }
 
         [HttpPost]
@@ -113,7 +113,7 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                //await this.pictureService.UpdatePicture(categoryId, Request.Body, (int)Request.ContentLength!);
+                await this.pictureService.UpdatePicture(categoryId, Request.Body, (int)Request.ContentLength!);
                 return this.Ok();
             }
             catch (Exception ex)
@@ -129,13 +129,32 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                /*var stream = await this.pictureService.ShowPicture(categoryId);
+                var stream = await this.pictureService.ShowPicture(categoryId);
                 var picture = new byte[stream.Length];
                 await stream.ReadAsync(picture);
 
-                var result = this.File(picture, "image/bmp", $"picture{categoryId}.bmp");
-                return result;*/
-                return Ok();
+                var result = File(picture, "image/bmp", $"picture{categoryId}.bmp");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex);
+            }
+        }
+
+        [HttpGet("{categoryId}/picture/base64")]
+        [ProducesResponseType(typeof(FileContentResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MyErrorMessage), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetPictureBase64(int categoryId)
+        {
+            try
+            {
+                var stream = await this.pictureService.ShowPicture(categoryId);
+                var picture = new byte[stream.Length];
+                await stream.ReadAsync(picture);
+
+                var result = Convert.ToBase64String(picture);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -150,7 +169,7 @@ namespace NorthWindApi2.Controllers
         {
             try
             {
-                //await this.pictureService.DestroyPicture(categoryId);
+                await this.pictureService.DestroyPicture(categoryId);
                 return this.Ok();
             }
             catch (Exception ex)

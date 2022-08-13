@@ -1,28 +1,28 @@
 ﻿namespace NorthWindApi2.Services
 {
-    public interface ICategoriesPictureService
+    public interface IPictureService
     {
         /// <summary>
-        /// Try to show a product category picture.
+        /// Try to show a picture.
         /// </summary>
-        /// <param name="categoryId">A product category identifier.</param>
+        /// <param name="categoryId">A object identifier.</param>
         /// <param name="bytes">An array of picture bytes.</param>
-        /// <returns>True if a product category is exist; otherwise false.</returns>
+        /// <returns>True if a object is exist; otherwise false.</returns>
         Task<Stream> ShowPicture(int categoryId);
 
         /// <summary>
-        /// Update a product category picture.
+        /// Update a object picture.
         /// </summary>
         /// <param name="categoryId">A product category identifier.</param>
         /// <param name="stream">A <see cref="Stream"/>Stream</param>
-        /// <returns>True if a product category is exist; otherwise false.</returns>
+        /// <returns>True if a object is exist; otherwise false.</returns>
         Task UpdatePicture(int categoryId, Stream stream, int contentLenth);
 
         /// <summary>
-        /// Destroy a product category picture.
+        /// Destroy a object picture.
         /// </summary>
         /// <param name="categoryId">A product category identifier.</param>
-        /// <returns>True if a product category is exist; otherwise false.</returns>
+        /// <returns>True if a object is exist; otherwise false.</returns>
         Task DestroyPicture(int categoryId);
     }
 }

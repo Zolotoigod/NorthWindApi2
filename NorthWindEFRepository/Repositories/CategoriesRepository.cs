@@ -75,5 +75,29 @@ namespace NorthWindEFRepository.Repositories
                 yield return category;
             }
         }
+
+        public async Task UpdatePicture(int categoryId, byte[]? newPicture)
+        {
+            var category = await GetById(categoryId)
+                ?? throw new KeyNotFoundException(string.Format(
+                    Defines.ErrorMesage.ItemNotFoundTemplate,
+                    Defines.EntityNames.Picture,
+                    categoryId));
+
+            category.Picture = newPicture;
+
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<Stream> ShowPicture(int id)
+        {
+            var category = await GetById(id)
+                ?? throw new KeyNotFoundException(string.Format(
+                    Defines.ErrorMesage.ItemNotFoundTemplate,
+                    Defines.EntityNames.Picture,
+                    id));
+
+            return new MemoryStream(category.Picture!);
+        }
     }
 }

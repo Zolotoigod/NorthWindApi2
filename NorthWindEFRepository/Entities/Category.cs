@@ -19,5 +19,10 @@ namespace NorthWindEFRepository.Entities
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
 
+        [Column(TypeName = "image")]
+        public byte[]? Picture { get; set; }
+
+        [InverseProperty(nameof(Product.Category))]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

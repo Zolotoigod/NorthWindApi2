@@ -37,7 +37,7 @@ namespace NorthWindApi2.DTO
         [StringLength(255)]
         public string? PhotoPath { get; set; }
 
-        public Employee ToEntity(byte[] photoByte) => new Employee 
+        public Employee ToEntity() => new Employee 
         {
             LastName = LastName,
             FirstName = FirstName,
@@ -48,7 +48,6 @@ namespace NorthWindApi2.DTO
             Region = Region,
             Country = Country,
             HomePhone = HomePhone,
-            Photo = photoByte
         };
     }
 }

@@ -35,5 +35,9 @@ namespace NorthWindEFRepository.Entities
         public short? ReorderLevel { get; set; }
 
         public bool Discontinued { get; set; }
+
+        [ForeignKey(nameof(CategoryId))]
+        [InverseProperty("Products")]
+        public virtual Category Category { get; set; }
     }
 }
