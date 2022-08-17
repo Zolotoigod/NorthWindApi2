@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthWindEFRepository.BlogEntities;
 
-namespace NorthWindEFRepository.Contexts
+namespace NorthWindEFRepository
 {
     public class BloggingContext : DbContext
     {
@@ -10,9 +10,9 @@ namespace NorthWindEFRepository.Contexts
         {
         }
 
-        public DbSet<BlogArticle>? BlogArticles { get; set; }
+        public DbSet<BlogArticle>? Articles { get; set; }
 
-        public DbSet<Link>? Link { get; set; }
+        public DbSet<Link>? Links { get; set; }
 
         public DbSet<Comment>? Comments { get; set; }
     }

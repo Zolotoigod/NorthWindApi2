@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NorthWindEFRepository.Contexts;
 using NorthWindEFRepository.Entities;
 
 namespace NorthWindEFRepository.Repositories
@@ -34,7 +33,7 @@ namespace NorthWindEFRepository.Repositories
         public async Task<int> Add(Category category)
         {
             await context.Categories!.AddAsync(category);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return category.Id;
         }
 

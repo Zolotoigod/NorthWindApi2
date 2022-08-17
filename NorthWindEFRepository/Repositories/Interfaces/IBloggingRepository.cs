@@ -3,7 +3,7 @@ using NorthWindEFRepository.Entities;
 
 namespace NorthWindEFRepository.Repositories
 {
-    public interface IBloggingRepository : IBaseRepository<BlogArticle>
+    public interface IBlogArticleRepository : IBaseRepository<BlogArticle>
     {
     }
 }

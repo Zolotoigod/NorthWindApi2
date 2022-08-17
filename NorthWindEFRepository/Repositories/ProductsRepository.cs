@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NorthWindEFRepository.Contexts;
 using NorthWindEFRepository.Entities;
 
 namespace NorthWindEFRepository.Repositories

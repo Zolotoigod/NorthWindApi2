@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NorthWindApi2.Services;
-using NorthWindEFRepository.Contexts;
+using NorthWindEFRepository;
 using NorthWindEFRepository.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +14,14 @@ builder.Services.AddSingleton<ICategoriesService, CategoriesService>()
                 .AddSingleton<IEmployeeRepository, EmployeeRepository>()
                 .AddSingleton<IPictureService, CategoriesPictureService>()
                 .AddSingleton<IPictureRepository, CategoriesRepository>()
-                .AddDbContext<NorthWindContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")), ServiceLifetime.Singleton);
+                .AddSingleton<IBlogArticleRepository, BlogArticleRepository>()
+                .AddSingleton<ILinkRepository,LinkRepository>()
+                .AddSingleton<ICommentRepository, CommentRepository>()
+                .AddSingleton<IBlogArticleService, BlogArticleService>()
+                .AddSingleton<ICommentsService, CommentsService>()
+                .AddSingleton<ILinkService, LinkService>()
+                .AddDbContext<NorthWindContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")), ServiceLifetime.Singleton)
+                .AddDbContext<BloggingContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Blogging")), ServiceLifetime.Singleton);
 
 builder.Services.AddSwaggerGen(c =>
                 {

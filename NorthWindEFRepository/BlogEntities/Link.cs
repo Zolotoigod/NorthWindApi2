@@ -6,13 +6,13 @@ namespace NorthWindEFRepository.BlogEntities
     public class Link
     {
         [Key]
-        [Column("LinkID")]
+        [Column("link_Id")]
         public int ID { get; set; }
 
-        [Column("ArticleID")]
+        [Column("article_Id")]
         public int ArticleId { get; set; }
 
-        [Column("ProductID")]
+        [Column("product_Id")]
         public int ProductId { get; set; }
     }
 }

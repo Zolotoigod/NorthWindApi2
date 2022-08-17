@@ -8,17 +8,17 @@ namespace NorthWindApi2.Controllers
     [Route("api/articles")]
     public class BlogArticlesController : ControllerBase
     {
-        private readonly IBloggingService blogService;
+        private readonly IBlogArticleService blogService;
         private readonly ILinkService linkService;
         private readonly ICommentsService commentService;
 
         public BlogArticlesController(
-            IBloggingService blogService,
-            ILinkService linkServic,
+            IBlogArticleService blogService,
+            ILinkService linkService,
             ICommentsService commentService)
         {
             this.blogService = blogService;
-            this.linkService = linkServic;
+            this.linkService = linkService;
             this.commentService = commentService;
         }
 

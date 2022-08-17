@@ -8,20 +8,20 @@ namespace NorthWindEFRepository.BlogEntities
     public class BlogArticle
     {
         [Key]
-        [Column("ArticleID")]
+        [Column("article_Id")]
         public int Id { get; set; }
 
-        [Column("article_title")]
+        [Column("article_Title")]
         public string Title { get; set; }
 
-        [Column("text")]
+        [Column("article_Text")]
         public string Text { get; set; }
 
-        [Column("publish_date", TypeName = "datetime")]
+        [Column("publish_Date", TypeName = "datetime")]
         public DateTime PublishDate { get; set; }
 
         [Required]
-        [Column("employee_id")]
+        [Column("employee_Id")]
         public int EmployeeId { get; set; }
     }
 }

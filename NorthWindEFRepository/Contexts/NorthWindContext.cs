@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthWindEFRepository.Entities;
 
-namespace NorthWindEFRepository.Contexts
+namespace NorthWindEFRepository
 {
     public class NorthWindContext : DbContext
     {

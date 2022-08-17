@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthWindEFRepository.BlogEntities;
-using NorthWindEFRepository.Contexts;
 
 namespace NorthWindEFRepository.Repositories
 {
@@ -31,6 +30,7 @@ namespace NorthWindEFRepository.Repositories
                     Defines.EntityNames.Comment,
                     commentId));
             context.Comments!.Remove(comment);
+            await context.SaveChangesAsync();
         }
 
         /// <inheritdoc/>
