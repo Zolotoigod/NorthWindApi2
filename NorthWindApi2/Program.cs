@@ -1,27 +1,10 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NorthWindApi2.Services;
-using NorthWindEFRepository;
-using NorthWindEFRepository.Repositories;
+using NorthWindApi2;
+using NorthWindApi2.AppBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ICategoriesService, CategoriesService>()
-                .AddSingleton<ICategoriesRepository, CategoriesRepository>()
-                .AddSingleton<IProductService, ProductService>()
-                .AddSingleton<IProductRepository, ProductsRepository>()
-                .AddSingleton<IEmployeeService, EmployeeService>()
-                .AddSingleton<IEmployeeRepository, EmployeeRepository>()
-                .AddSingleton<IPictureService, CategoriesPictureService>()
-                .AddSingleton<IPictureRepository, CategoriesRepository>()
-                .AddSingleton<IBlogArticleRepository, BlogArticleRepository>()
-                .AddSingleton<ILinkRepository,LinkRepository>()
-                .AddSingleton<ICommentRepository, CommentRepository>()
-                .AddSingleton<IBlogArticleService, BlogArticleService>()
-                .AddSingleton<ICommentsService, CommentsService>()
-                .AddSingleton<ILinkService, LinkService>()
-                .AddDbContext<NorthWindContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")), ServiceLifetime.Singleton)
-                .AddDbContext<BloggingContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Blogging")), ServiceLifetime.Singleton);
+builder.ConfigurateApp();
 
 builder.Services.AddSwaggerGen(c =>
                 {
@@ -58,4 +41,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
+app.Logger.LogInformation(string.Format(Defines.LogMessage.AppStart, app.Configuration.GetSection("ASPNETCORE_URLS").Value.ToString()));
+//app.Lifetime.ApplicationStopped.Register(() => app.Logger.LogInformation(string.Format(Defines.LogMessage.AppStop)));    
+
 app.Run();
+

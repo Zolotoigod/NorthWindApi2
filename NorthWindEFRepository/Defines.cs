@@ -3,6 +3,7 @@ namespace NorthWindEFRepository
 {
     public static class Defines
     {
+        // This is first sequence of byte, for use in old access DB
         // can add more bytes for more accuracy
         public static readonly byte[] AccessDBServiceBytes = new byte[]
         {
